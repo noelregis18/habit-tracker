@@ -156,6 +156,10 @@ const Footer = () => {
               Asansol, West Bengal, India
             </a>
           </div>
+
+          <div className="mt-2 text-sm font-medium text-primary">
+            Designed and Developed by Noel Regis
+          </div>
           
           <div className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Growth Habit Hub. All rights reserved.
