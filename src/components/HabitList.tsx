@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Habit } from "@/types/habit";
 import HabitCard from "./HabitCard";
@@ -16,6 +15,7 @@ interface HabitListProps {
   onAddHabit: (habit: Omit<Habit, 'id' | 'createdAt' | 'completedDates' | 'streak'>) => void;
   onUpdateHabit: (habit: Habit) => void;
   onDeleteHabit: (id: string) => void;
+  onShowAddForm: () => void;
 }
 
 const HabitList = ({
@@ -24,6 +24,7 @@ const HabitList = ({
   onAddHabit,
   onUpdateHabit,
   onDeleteHabit,
+  onShowAddForm,
 }: HabitListProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -108,7 +109,7 @@ const HabitList = ({
             <Button
               variant="default"
               size="sm"
-              onClick={() => setShowAddForm(true)}
+              onClick={onShowAddForm}
             >
               <Plus className="mr-1 h-4 w-4" />
               Add Habit
@@ -124,11 +125,11 @@ const HabitList = ({
             <h3 className="mt-4 text-lg font-semibold">No habits found</h3>
             <p className="mt-2 text-sm text-muted-foreground">
               {habits.length === 0
-                ? "Start building better habits by adding your first one!"
+                ? "Start building some positive habits today!"
                 : "Try a different search term or add a new habit."}
             </p>
             <Button 
-              onClick={() => setShowAddForm(true)} 
+              onClick={onShowAddForm} 
               className="mt-4"
             >
               <Plus className="mr-1 h-4 w-4" />
@@ -176,12 +177,7 @@ const HabitList = ({
         )}
       </div>
 
-      <HabitForm
-        open={showAddForm}
-        onClose={() => setShowAddForm(false)}
-        onSubmit={onAddHabit}
-      />
-
+      {/* Remove local form handling and rely on the parent component */}
       {editHabit && (
         <HabitForm
           open={!!editHabit}

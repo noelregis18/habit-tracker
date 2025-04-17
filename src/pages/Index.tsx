@@ -6,8 +6,9 @@ import Footer from '@/components/Footer';
 import HabitList from '@/components/HabitList';
 import HabitStats from '@/components/HabitStats';
 import WelcomeBanner from '@/components/WelcomeBanner';
-import { HabitProvider, useHabits } from '@/contexts/HabitContext';
+import { useHabits } from '@/contexts/HabitContext';
 import { Habit } from '@/types/habit';
+import HabitForm from '@/components/HabitForm';
 
 const Dashboard = () => {
   const { habits, addHabit, updateHabit, deleteHabit, toggleHabitCompletion } = useHabits();
@@ -52,6 +53,7 @@ const Dashboard = () => {
               onAddHabit={handleAddHabit}
               onUpdateHabit={updateHabit}
               onDeleteHabit={deleteHabit}
+              onShowAddForm={() => setShowAddHabitForm(true)}
             />
           </TabsContent>
           
@@ -73,12 +75,20 @@ const Dashboard = () => {
       </main>
 
       <Footer />
+      
+      <HabitForm
+        open={showAddHabitForm}
+        onClose={() => setShowAddHabitForm(false)}
+        onSubmit={handleAddHabit}
+      />
     </div>
   );
 };
 
 const Index = () => {
-  return <Dashboard />;
+  return (
+    <Dashboard />
+  );
 };
 
 export default Index;

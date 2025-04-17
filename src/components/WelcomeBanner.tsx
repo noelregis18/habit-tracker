@@ -3,46 +3,37 @@ import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 
 interface WelcomeBannerProps {
-  userName?: string;
   completedToday: number;
   totalHabits: number;
   onAddHabit: () => void;
 }
 
 const WelcomeBanner = ({ 
-  userName = "there", 
   completedToday, 
   totalHabits, 
   onAddHabit 
 }: WelcomeBannerProps) => {
-  const getTimeBasedGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
-  };
-
   const getMessage = () => {
     if (totalHabits === 0) {
       return "Let's start building some positive habits today!";
     }
     
     if (completedToday === 0) {
-      return "You have habits to complete today. You can do this!";
+      return "You have habits to complete today.";
     }
     
     if (completedToday < totalHabits) {
-      return `You've completed ${completedToday} of ${totalHabits} habits today. Keep going!`;
+      return `You've completed ${completedToday} of ${totalHabits} habits today.`;
     }
     
-    return "Amazing! You've completed all your habits for today!";
+    return "You've completed your habits for today.";
   };
 
   return (
     <div className="relative bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-lg p-6">
       <div className="max-w-3xl">
         <h1 className="text-2xl font-bold tracking-tight">
-          {getTimeBasedGreeting()}, {userName}!
+          GrowthHub
         </h1>
         
         <p className="mt-2 text-muted-foreground">
